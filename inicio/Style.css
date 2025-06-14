@@ -1,113 +1,175 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-image: url(Imagenes/Fondo.png);
-    background-position: center;
-    background-size: cover;
-    background-attachment: fixed;
+  background-color: #f4f6f8;
+  color: #212121;
+  line-height: 1.6;
 }
 
 .sidebar {
-    width: 100%;
-    border: apx solid #eee;
-    height: 1%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .sidehead {
-    background-color: #196EF0;
+  background-color: #5A7D9A;
+  padding: 12px 16px;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .sidehead .Logo {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 5px;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
 }
 
-.fa-brands {
-    font-size: 38px;
-    margin: 0 10px;
-    color: #eee;
-    cursor: pointer;
+.Logoinicial {
+  height: 40px;
+  width: auto;
+  border-radius: 5px;
 }
 
-.Logoinicial:hover, .Redes:hover{
-    transform: scale(0.89);
+.acciones {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
-.Form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 20px;
-    height: 500px;
-    font-weight: bold;
-    background-color: #ffffff;
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #6b90b0, #4e6b83);
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-form {
-    padding: 20px 20px;
-    font-family: Arial, Helvetica, sans-serif ;
-    font-size: 13px;
+.btn:hover {
+  background: linear-gradient(145deg, #4e6b83, #6b90b0);
+  transform: scale(1.03);
 }
 
-h1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    height: 50px;
-    font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif ;
+.btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-form .username {
-    position: relative;
-    border-bottom: 2px solid #196EF0;
-    margin: 15px ;
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 2rem;
 }
 
-.username input{
-    width: 100%;
-    padding: 0 5px;
-    height: 40px;
-    border: none;
-    background-color: #F7F7F7;
-    outline: none;
+.login-form {
+  background: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-.recordar {
-    text-align: right;
+.login-form h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #1a237e;
 }
 
-.Inicio {
-    border-radius: 20px;
-    margin-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    font-size: 20px;
-    width: 350px;
-    cursor: pointer;
-    color: white;
-    background-color: #333;
+.login-form label {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  color: #333;
 }
 
-.Inicio:hover {
-    background-color: #196EF0;
+.login-form input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 1rem;
+  border: 1px solid #cfd8dc;
+  border-radius: 8px;
+  background-color: #f5faff;
+  font-size: 0.95rem;
+  transition: border 0.3s ease;
 }
 
-.Registrar {
-    text-align: center;
+.login-form input:focus {
+  outline: none;
+  border-color: #5a7d9a;
 }
 
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(145deg, #5a7d9a, #4e6b83);
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
 
+.btn-login:hover {
+  background: linear-gradient(145deg, #4e6b83, #5a7d9a);
+  transform: scale(1.02);
+}
+
+#loginError {
+  background-color: #e53935;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .login-form {
+    padding: 1.5rem;
+  }
+
+  .login-form h1 {
+    font-size: 1.3rem;
+  }
+
+  .btn-login {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .Logoinicial {
+    width: 120px;
+    height: auto;
+  }
+
+  .fa-brands {
+    font-size: 28px;
+  }
+}

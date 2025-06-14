@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Papelera Apack - Registro de Productos</title>
+
+    <script src="https://kit.fontawesome.com/1d3a82338e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous" />
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="sidehead">
+        <div class="Logo">
+            <img src="../Imagen/Logo_Apack.jpg" alt="Logo" class="Logoinicial" />
+          <input type="text" id="searchInput" class="search-input-header" placeholder="🔍   Buscar por código o nombre…"/>
+          <div class="acciones">
+            <button onclick="window.location.href='../RegistroNuevoProductos/index.html'" class="btn">Agregar Productos</button>
+            <button id="btnCerrarSesion" class="btn logout">Cerrar sesión</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script src="https://kit.fontawesome.com/1d3a82338e.js" crossorigin="anonymous"></script>
+
+    
+  <div class="galeria" id="galeria"></div>
+
+  <!-- Modal de edición -->
+  <div class="modal" id="modalEditar">
+  <span class="cerrar" id="cerrarModalEditar">&times;</span>
+  <div class="modal-contenido" id="contenidoModalEditar">
+    <h3>Editar Producto</h3>
+    <div class="modal-body-editar">
+      <!-- Izquierda: Inputs -->
+      <form id="formEditarProducto" class="form-edicion">
+        <label class="Datos">Código de Producto</label>
+        <input type="text" id="editCodigo" placeholder="Código" disabled />
+        <label class="Datos">Nombre de Producto</label>
+        <input type="text" id="editNombre" placeholder="Nombre" />
+        <label class="Datos">Precio</label>
+        <input type="number" id="editPrecio" placeholder="Precio" />
+        <label>Imagen</label>
+        <input type="file" id="editImagen" accept="image/*" />
+        <button id="btnConfirmarEdicion" class="btn-ir-modificar">Confirmar</button>
+      </form>
+
+      <!-- Derecha: Vista previa -->
+      <div id="previewEditar" class="preview-editar">
+        <img id="imagenPreviaEditar" src="#" alt="Vista previa" style="display: none;"/>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+    <!-- Funciones Modificar/Eliminar -->
+    <script src="script.js" defer></script>
+    <!-- Cierre de Session -->
+    <script src="../Seguridad/sesion.js"></script>
+    <!-- Seguridad de pagina -->
+    <script src="../Seguridad/verificarSesion.js"></script>
+
+
+    <!-- Modal para ampliar imagen -->
+<div id="visorImagen" class="modal-imagen">
+  <span class="cerrar">&times;</span>
+  <img class="imagen-ampliada" id="imagenAmpliada" />
+</div>
+
+</body>
+</html>

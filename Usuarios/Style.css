@@ -1,0 +1,693 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #222222;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Cabecera */
+.sidehead {
+  background-color: #5A7D9A;
+  padding: 12px 16px;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidehead .Logo {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+}
+
+.Logoinicial {
+  height: 40px;
+  width: auto;
+  border-radius: 5px;
+}
+
+.acciones {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.fa-brands {
+  font-size: 28px;
+  color: #F9F9F9;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.fa-brands:hover {
+  transform: scale(0.95);
+}
+
+.search-input-header {
+  flex: 1 1 100%;
+  max-width: 400px;
+  padding: 6px 10px;
+  font-size: 15px;
+  border: 1px solid #DDD;
+  border-radius: 10px;
+  margin: 10px auto;
+  text-align: center;
+  display: block;
+}
+
+h1 {
+  text-align: center;
+  background-color: #5A7D9A;
+  color: #F9F9F9;
+  padding: 1.2rem;
+  font-size: 26px;
+  letter-spacing: 1px;
+}
+
+/* Galería de productos */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(5, 0.2fr);
+  gap: 16px;
+  padding: 20px;
+  justify-items: center;
+  background: #F9F9F9;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.producto-card {
+  background-color: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease;
+  width: 100%;
+  max-width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+}
+
+.producto-card:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.producto-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background-color: #FFFFFF;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+}
+
+.producto-card img:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+}
+
+.info-producto {
+  font-size: 14px;
+  color: #555555;
+  text-align: center;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  font-weight: 400;
+}
+
+.info-producto h4 {
+  font-weight: 600;
+  color: #222222;
+  margin-bottom: 6px;
+}
+
+/* Modal general */
+.modal {
+  display: none; /* Asegura que el modal esté oculto al inicio */
+  position: fixed;
+  z-index: 1000;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);  /* Fondo oscuro transparente */
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.mostrar {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Contenido del modal */
+.modal-contenido {
+  position: relative;
+  background: #FFFFFF;
+  padding: 20px 30px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  animation: fadeInScale 0.4s ease forwards;
+  transform-origin: center;
+}
+
+/* Botón cerrar modal */
+.cerrar, #cerrarModalEditar {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 50px;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.3s ease;
+  user-select: none;
+  z-index: 10;
+  width: 120px;  
+  height: 120px;
+}
+
+.cerrar:hover, #cerrarModalEditar:hover {
+  color: #A15A5A;
+}
+
+/* Inputs dentro del modal */
+.modal input, 
+.modal select, 
+.modal textarea {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #DDDDDD;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.modal input:focus,
+.modal select:focus,
+.modal textarea:focus {
+  outline: none;
+  border-color: #5A7D9A;
+}
+
+/* Preview de imagen */
+#previewEditar img {
+  max-width: 100%;
+  max-height: 350px;
+  border-radius: 10px;
+  margin-top: 10px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  display: block;
+}
+
+#previewEditar img:hover {
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+/* Modal imagen ampliada */
+.modal-imagen {
+  display: none; /* Modal no visible al inicio */
+  position: fixed;
+  z-index: 1100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+  justify-content: center;
+  align-items: center;
+}
+
+.imagen-ampliada {
+  position: absolute;
+  top: 50%;                   /* Posiciona la imagen en el centro vertical */
+  left: 50%;                  /* Posiciona la imagen en el centro horizontal */
+  transform: translate(-50%, -50%);  /* Mueve la imagen hacia atrás para centrarla perfectamente */
+  max-width: 90%;             /* Limita el tamaño máximo de la imagen */
+  max-height: 90%;            /* Limita la altura máxima de la imagen */
+  object-fit: contain;        /* Mantiene la proporción de la imagen sin distorsión */
+  border-radius: 8px;         /* Bordes redondeados */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);  /* Sombra suave */
+  transition: transform 0.3s ease;  /* Transición suave */
+}
+
+/* Animación de zoom suave al hacer hover en la imagen */
+.imagen-ampliada:hover {
+  transform: translate(-50%, -50%) scale(1.05);  /* Aplica un zoom al hacer hover */
+}
+
+/* Botón "Agregar al carrito" */
+.acciones .btn {
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 20px;
+  background-color: #5A7D9A;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Efecto de hover en el botón "Agregar al carrito" */
+.acciones .btn:hover {
+  background-color: #4E6B83;
+  transform: scale(1.03);
+}
+
+/* Animación suave cuando se hace clic en el botón */
+.acciones .btn:active {
+  transform: scale(0.98); /* Da el efecto de presionar el botón */
+}
+
+.emoji-icon {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  font-size: 20px;
+}
+
+/* Estilo para el icono del botón */
+.acciones .btn .emoji-icon {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+
+/* Efecto cuando el botón tiene el emoji de confirmación */
+.acciones .btn:active .emoji-icon {
+  transform: rotate(360deg); /* Efecto de giro en el emoji */
+}
+
+.acciones .btn .emoji-icon.confirmado {
+  opacity: 0;
+  transform: scale(0.8);
+  animation: emojiAppear 0.3s forwards; /* Aplicamos la animación */
+}
+
+@keyframes emojiAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .galeria {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sidehead {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .Logo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .acciones {
+    justify-content: center;
+    margin: 10px 0 0 0;
+    flex-wrap: wrap;
+  }
+
+  .search-input-header {
+    max-width: 90%;
+    margin: 10px auto;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  .galeria {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 15px;
+  }
+
+  .wa-fab {
+    width: 50px;
+    height: 50px;
+    font-size: 1.45rem;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* Modal carrito */
+#modalCarrito {
+  display: none;               /* Oculto por defecto */
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#modalCarrito .modal-contenido {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+/* Botón cerrar */
+#modalCarrito .cerrar {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.carrito-icono {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.3rem;    /* ajusta según tu icono */
+  margin-right: 20px;
+}
+
+.carrito-icono i {
+  color: white;
+}
+
+.contador-carrito {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  background: red;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+.cantidad-input {
+  width: 50px;
+  padding: 6px;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #CCC;
+  border-radius: 14px;
+  background-color: #FAFAFA;
+  color: #333;
+  transition: all 0.3s ease;
+  margin-right: 8px;
+}
+
+/* Cambio de color y suavidad al hacer hover en el input de cantidad */
+.cantidad-input:hover {
+  border-color: #5A7D9A; /* Color suave */
+  background-color: #E1E1E1;
+}
+
+/* Input de cantidad al estar activo (focus) */
+.cantidad-input:focus {
+  outline: none;
+  border-color: #5A7D9A;
+  background-color: #FFF;
+}
+
+/* Fondo semitransparente del segundo modal */
+.modal-nuevo {
+  display: none;              /* oculto por defecto */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* Caja de contenido del segundo modal */
+.modal-contenido-nuevo {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  padding: 1.5rem;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Botón “X” para cerrar */
+.cerrar-nuevo {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Encabezado dentro del modal */
+.modal-contenido-nuevo h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+/* Lista de historial */
+#listaHistorial {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  max-height: 600px;
+  overflow-y: auto;
+}
+#listaHistorial li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* Cada item: imagen + detalle (que es un flex de 4 columnas) */
+#listaHistorial li.historial-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* Miniatura */
+#listaHistorial li.historial-item .thumb-historial {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Contenedor de datos */
+#listaHistorial li.historial-item .detalle {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Opcional: un poco de estilo a los textos */
+#listaHistorial li.historial-item .detalle .nombre {
+  font-weight: bold;
+}
+#listaHistorial li.historial-item .detalle .precio,
+#listaHistorial li.historial-item .detalle .cantidad {
+  color: #555;
+}
+
+/* Contenedor de botones */
+.modal-acciones-nuevo {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Estilos básicos para los botones */
+.modal-acciones-nuevo .btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.modal-acciones-nuevo .btn.cancelar {
+  background: #ddd;
+}
+.modal-acciones-nuevo .btn.cancelar:hover {
+  background: #ccc;
+}
+
+/* Header de columnas */
+.historial-header {
+  display: flex;
+  align-items: center;
+  gap: 4rem;             /* antes 0.9rem → separa más */
+  padding-right: 98px;
+  border-bottom: 2px solid #ccc;
+  width: 460px;
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+.historial-header span:not(.col-thumb) {
+  flex: 1;
+  text-align: right;
+}
+
+.thumb-historial {
+  flex: 0 0 50px;       /* igual que .col-thumb */
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Ya en tus items, ajusta .detalle para que coincida */
+#listaHistorial li.historial-item .detalle {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+}
+#listaHistorial li.historial-item .detalle span {
+  flex: 1;
+}
+
+/* Minimalismo para la fila de resumen */
+.historial-summary {
+  padding-top: 0.5rem;
+  margin-top: 1rem;
+  border-top: 1px solid #e0e0e0;   /* línea suave */
+  background-color: #fafafa;
+}
+
+
+.historial-summary .detalle.summary {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;                /* un poco de énfasis */
+  color: #333333;                  /* tono ligeramente más suave */
+}
+
+.historial-summary .detalle.summary span {
+  flex: 1;
+  text-align: right;
+}
+
+.historial-summary .detalle.summary span:first-child {
+  text-align: left;                /* el total de artículos queda a la izquierda */
+}
+
+/* ========== Botón WhatsApp “píldora” ========== */
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .75rem 1.5rem;
+  font: 600 1rem/1 'Segoe UI', sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #25d366, #1ebe5d); /* verde WA */
+  border: 0;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  transition: transform .15s ease, box-shadow .15s ease;
+  cursor: pointer;
+}
+
+.btn-whatsapp i { font-size: 1.2rem; }
+
+/* Hover / focus (levita un poco) */
+.btn-whatsapp:hover,
+.btn-whatsapp:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.20);
+}
+
+/* Active (clic) */
+.btn-whatsapp:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0,0,0,.12);
+}
+
+/* Accesibilidad para teclado */
+.btn-whatsapp:focus-visible {
+  outline: 2px dashed #fff;
+  outline-offset: 4px;
+}
+
+/* Botón flotante WhatsApp */
+.wa-fab {
+  position: fixed;
+  bottom: 22px;                 /* distancia al borde inferior */
+  right: 22px;                  /* distancia al borde derecho  */
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25d366;          /* verde WA */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  transition: transform .16s ease, box-shadow .16s ease;
+  z-index: 1200;                /* por encima de los modales */
+}
+
+.wa-fab:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.30);
+}
+
+.wa-fab:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0,0,0,.18);
+}

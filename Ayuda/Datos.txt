@@ -6,3 +6,7 @@ psql -U postgres -p 3000 -h localhost -d nombre_de_tu_base
 
 node iniciar
 npm run dev
+
+hash contraseña con consulta 
+
+SELECT contraseña FROM usuarios WHERE LOWER(email) = LOWER('Fede@gmail.com');
