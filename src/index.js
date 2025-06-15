@@ -21,28 +21,38 @@ const __dirname  = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-
-// Middlewares
+const __root = path.resolve();  
+const usuariosDir = path.join(__root,'Usuarios');
+app.use(express.static(usuariosDir));
+// Archivos públicos
+app.use(express.static(path.join(__root, 'public')));
+app.get('/', (req,res) =>
+  res.sendFile(path.join(usuariosDir,'index.html'))
+);
+// 1. Middlewares globales
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
- // rutas “protegidas” u ofc:
+// 2. Rutas API
 app.use('/auth', authRoutes);
 app.use('/api/productos', productosRoutes);
+app.use('/api/imagenes', imagenesRoutes);
 
 
+// 3. Archivos estáticos de Usuarios (galería pública)
+app.use(express.static(usuariosDir));
+app.get('/', (req,res)=> res.sendFile(path.join(usuariosDir,'index.html')));
 
- // directorio estático donde Multer deja los archivos
+
+// 4. Archivos Multer (sólo si es correcto exponerlos)
 app.use('/imagenesProductos',
   express.static(path.join(__dirname, '../imagenesProductos'))
 );
 
-// Rutas para la galería pública
-app.use('/api/imagenes', imagenesRoutes);
-
-
+// --- Health-check -------------------------------------------------
+app.get('/api/ping', (req, res) => res.json({ status: 'ok' }));
 app.listen(PORT, () => {
   console.log(`✅ API escuchando en http://localhost:${PORT}`);
 });

@@ -377,6 +377,11 @@ h1 {
     bottom: 16px;
     right: 16px;
   }
+
+  .site-footer{
+    flex-direction:column;
+    gap:.25rem;
+  }
 }
 
 /* Modal carrito */
@@ -690,4 +695,29 @@ h1 {
 .wa-fab:active {
   transform: translateY(0);
   box-shadow: 0 3px 8px rgba(0,0,0,.18);
+}
+
+.site-footer{
+  position:relative;              /* permite posicionar el © */
+  display:flex;
+  justify-content:center;         /* centra el bloque interior */
+  align-items:center;
+  padding:.75rem 1.25rem;
+  background:#f9f9f9;
+  color:#666;
+  font-size:.875rem;
+  border-top:1px solid #eee;
+  box-shadow:0 -1px 3px rgb(0 0 0 / .03);
+}
+
+/* Quita subrayado y agrega transición */
+.admin-link{
+  text-decoration:none;
+  color:inherit;
+  opacity:.6;
+  transition:opacity .2s;
+}
+.admin-link:hover,
+.admin-link:focus{
+  opacity:1;                  /* resalta sólo al interactuar */
 }
