@@ -10,3 +10,12 @@ npm run dev
 hash contraseña con consulta 
 
 SELECT contraseña FROM usuarios WHERE LOWER(email) = LOWER('Fede@gmail.com');
+
+iniciar bash
+psql -h localhost -U postgres -d apack -W
+
+# Quitarla solo para esta sesión:
+unset PGPORT         
+
+# (Opcional) dejarla fija al valor estándar
+export PGPORT=5432
