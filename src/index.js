@@ -9,6 +9,10 @@ import cors from 'cors';
 import imagenesRoutes from './routes/imagenes.routes.js';
 import productosRoutes from './routes/product.routes.js';
 import authRoutes from './routes/auth.routes.js';
+import helmet from 'helmet';
+import compression from 'compression';
+
+
 
 dotenv.config();
 if (!process.env.JWT_SECRET) {
@@ -34,6 +38,13 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
+// Middlewares globales (antes de las rutas)
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' }
+  })
+);
+app.use(compression());
 
 // 2. Rutas API
 app.use('/auth', authRoutes);
