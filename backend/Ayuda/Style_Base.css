@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif ;
+    font-size: 15px;
+    
+}
+
+.sidebar {
+    width: 100%;
+    border: apx solid #eee;
+    height: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidehead {
+    background-color: #196EF0;
+}
+
+.sidehead .Logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+.fa-brands {
+    font-size: 38px;
+    margin: 0 10px;
+    color: #eee;
+    cursor: pointer;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

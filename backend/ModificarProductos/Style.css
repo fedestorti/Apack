@@ -1,0 +1,385 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #222222;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Cabecera */
+.sidehead {
+  background-color: #5A7D9A;
+  padding: 12px 16px;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sidehead .Logo {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+  width: 100%;
+}
+
+.Logoinicial {
+  height: 40px;
+  width: auto;
+  border-radius: 5px;
+}
+
+.search-input-header {
+  flex-grow: 1;
+  max-width: 400px;
+  padding: 6px 10px;
+  font-size: 15px;
+  border: 1px solid #DDD;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.acciones {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.fa-brands {
+  font-size: 28px;
+  color: #F9F9F9;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.fa-brands:hover {
+  transform: scale(0.95);
+}
+
+h1 {
+  text-align: center;
+  background-color: #5A7D9A;
+  color: #F9F9F9;
+  padding: 1.2rem;
+  font-size: 26px;
+  letter-spacing: 1px;
+}
+
+/* Galería de productos */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(5, 0.2fr);
+  gap: 16px;
+  padding: 20px;
+  justify-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.producto-card {
+  background-color: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease;
+  width: 100%;
+  max-width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+}
+
+.producto-card:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.producto-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background-color: #FFFFFF;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+}
+
+.producto-card img:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+}
+
+.info-producto {
+  font-size: 14px;
+  color: #555555;
+  text-align: center;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  font-weight: 400;
+}
+
+.info-producto h4 {
+  font-weight: 600;
+  color: #222222;
+  margin-bottom: 6px;
+}
+
+/* Botones editar y eliminar */
+.btnEditar, .btnEliminar {
+  padding: 6px 12px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  margin: 4px 6px;
+  width: 100px;
+  text-align: center;
+}
+
+.btnEditar {
+  background-color: #5A7D9A;
+  color: white;
+}
+
+.btnEditar:hover {
+  background-color: #4E6B83;
+}
+
+.btnEliminar {
+  background-color: #A15A5A;
+  color: white;
+}
+
+.btnEliminar:hover {
+  background-color: #824B4B;
+}
+
+/* Modal general */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.mostrar {
+  display: flex;
+}
+
+.modal-contenido {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.cerrar, #cerrarModalEditar {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.cerrar:hover, #cerrarModalEditar:hover {
+  color: #d32f2f;
+}
+
+.modal-contenido label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.modal-contenido input[type="text"],
+.modal-contenido input[type="number"],
+.modal-contenido input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border 0.3s;
+}
+
+.modal-contenido input:focus {
+  border-color: #5a7d9a;
+  outline: none;
+}
+
+#btnConfirmarEdicion {
+  background: linear-gradient(135deg, #5a7d9a, #4e6b83);
+  color: white;
+  font-size: 1rem;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.2s ease;
+}
+
+#btnConfirmarEdicion:hover {
+  transform: scale(1.03);
+}
+
+.preview-editar {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.preview-editar img {
+  max-width: 100%;
+  max-height: 280px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  padding: 6px;
+  object-fit: contain;
+}
+
+.modal-imagen {
+  display: none;
+  position: fixed;
+  z-index: 1100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-imagen.mostrar {
+  display: flex;
+}
+
+.imagen-ampliada {
+  max-width: 80%;
+  max-height: 80%;
+  margin: auto;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #000;
+  cursor: pointer;
+}
+
+.btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #5A7D9A;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background-color: #4E6B83;
+}
+
+.btn.submit {
+  background-color: #5A7D9A;
+  color: white;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.btn.submit:hover {
+  background-color: #4E6B83;
+}
+
+.logout {
+  background-color: #A15A5A;
+}
+
+.logout:hover {
+  background-color: #824B4B;
+}
+
+@media (max-width: 768px) {
+  .galeria {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sidehead {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .Logo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .acciones {
+    justify-content: center;
+    margin: 10px 0 0 0;
+    flex-wrap: wrap;
+  }
+
+  .search-input-header {
+    max-width: 90%;
+    margin: 10px auto;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  .btnEditar, .btnEliminar {
+    font-size: 12px;
+    padding: 4px 8px;
+    width: auto;
+  }
+
+  .galeria {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 15px;
+  }
+}
