@@ -1,10 +1,9 @@
 // controllers/user.controllers.js
 import bcrypt   from 'bcryptjs';
 import jwt      from 'jsonwebtoken';
-import dotenv   from 'dotenv';
 import { pool } from '../db.js';
 
-dotenv.config();
+
 const SECRET = process.env.JWT_SECRET;
 const ALG    = 'HS256';
 const COOKIE_OPTS = {

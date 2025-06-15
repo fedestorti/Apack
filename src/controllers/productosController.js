@@ -134,21 +134,28 @@ export const actualizarProducto = async (req, res) => {
 
 // Función para eliminar producto (ADMIN)
 export const eliminarProducto = async (req, res) => {
+  console.log('🏷️ Entré a eliminarProducto para:', req.params.codigo);
+
   try {
     const { codigo } = req.params;
     const { rows } = await pool.query(
       'SELECT imagen FROM productos WHERE LOWER(TRIM(codigo_producto)) = LOWER($1)',
       [codigo]
     );
-    if (!rows.length) return res.status(404).json({ message: 'Producto no encontrado' });
+    if (!rows.length) {
+      return res.status(404).json({ message: 'Producto no encontrado' });
+    }
 
     await borrarImagenAnterior(rows[0].imagen);
-    await pool.query('DELETE FROM productos WHERE LOWER(TRIM(codigo_producto)) = LOWER($1)', [codigo]);
-    res.json({ message: 'Producto e imagen eliminados' });
+    await pool.query(
+      'DELETE FROM productos WHERE LOWER(TRIM(codigo_producto)) = LOWER($1)',
+      [codigo]
+    );
 
+    return res.json({ message: 'Producto e imagen eliminados' });
   } catch (err) {
     console.error('Error al eliminar:', err);
-    res.status(500).json({ message: 'Error al eliminar producto' });
+    return res.status(500).json({ message: 'Error al eliminar producto' });
   }
 };
 

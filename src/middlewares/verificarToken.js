@@ -1,8 +1,6 @@
 // src/middlewares/verificarToken.js
 
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const SECRET    = process.env.JWT_SECRET;
 const ALGORITHM = 'HS256';  // algoritmo esperado al firmar
@@ -14,6 +12,8 @@ const ALGORITHM = 'HS256';  // algoritmo esperado al firmar
  */
 export function verificarToken(req, res, next) {
   // 1) Extraer token
+  console.log('🔑 SECRET en middleware:', SECRET);
+  console.log('Auth header recibido:', req.headers.authorization);
   const token = req.cookies?.token
              || req.headers.authorization?.split(' ')[1];
   if (!token) {

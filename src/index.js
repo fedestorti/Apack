@@ -1,20 +1,23 @@
 // index.js
 import path from 'path';
 import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import dotenv from 'dotenv';
 import cors from 'cors';
 import imagenesRoutes from './routes/imagenes.routes.js';
 import productosRoutes from './routes/product.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import helmet from 'helmet';
 import compression from 'compression';
-
-
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
+
+
+
+
 if (!process.env.JWT_SECRET) {
   console.error('❌ Falta JWT_SECRET en el .env');
   process.exit(1);
@@ -30,14 +33,18 @@ const usuariosDir = path.join(__root,'Usuarios');
 app.use(express.static(usuariosDir));
 // Archivos públicos
 app.use(express.static(path.join(__root, 'public')));
-app.get('/', (req,res) =>
-  res.sendFile(path.join(usuariosDir,'index.html'))
-);
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 // 1. Middlewares globales
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization']
+}));
 // Middlewares globales (antes de las rutas)
 app.use(
   helmet({
@@ -53,9 +60,13 @@ app.use('/api/imagenes', imagenesRoutes);
 
 
 // 3. Archivos estáticos de Usuarios (galería pública)
-app.use(express.static(usuariosDir));
-app.get('/', (req,res)=> res.sendFile(path.join(usuariosDir,'index.html')));
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve('public', 'Usuarios', 'index.html'));
+});
 
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve('public', 'Usuarios', 'index.html'));
+});
 
 // 4. Archivos Multer (sólo si es correcto exponerlos)
 app.use('/imagenesProductos',

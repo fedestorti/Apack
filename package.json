@@ -1,21 +1,14 @@
 {
-  "name": "ayuda",
+  "name": "apack",
   "version": "1.0.0",
-  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node src/index.js",
-    "_comment2": "↑↑↑↑↑↑↑↑↑↑↑↑↑ enlazar json con js ",
-    "dev": "nodemon src/index.js",
-    "_comment": "↑↑↑↑↑↑↑↑↑↑↑↑↑ a la espera de actualizacion de datos",
-    "build": "vite build"
+    "start": "cross-env NODE_ENV=production dotenv -e .env node src/index.js",
+    "dev":   "cross-env NODE_ENV=development dotenv -e .env nodemon src/index.js",
+    "build": "echo \"No build step required\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "bcryptjs": "^3.0.2",
+    "bcrypt": "^6.0.0",
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -23,14 +16,16 @@
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
-    "jwt-decode": "^4.0.0",
     "morgan": "^1.10.0",
     "multer": "^2.0.0",
     "pg": "^8.16.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "nodemon": "^3.1.10",
-    "vite": "^6.3.5"
+    "dotenv-cli": "^8.0.0",
+    "nodemon": "^3.1.10"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
