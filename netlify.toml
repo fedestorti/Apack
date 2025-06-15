@@ -1,15 +1,11 @@
-
 [build]
-  
   command = "npm ci && npm run build"
   publish = "public"
-
 
 [[redirects]]
   from   = "/:folder/*"
   to     = "/:folder/index.html"
   status = 200
-
 
 [[redirects]]
   from   = "/*"
