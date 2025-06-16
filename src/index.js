@@ -61,7 +61,6 @@ app.get('/', (req, res) => {
 app.get('*', (req, res) => {
   res.sendFile(path.join(publicDir, 'Usuarios', 'index.html'));
 });
-
 // -------- Health check -------- //
 app.get('/api/ping', (req, res) => res.json({ status: 'ok' }));
 
