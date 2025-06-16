@@ -50,7 +50,7 @@ app.use(
 
 // ----- Frontend estático (public) ---- //
 const publicDir = path.join(__dirname, '../public');
-
+app.use(express.static(publicDir));
 
 // Si entras a la raíz, sirve Usuarios/index.html
 app.get('/', (req, res) => {
