@@ -4,11 +4,12 @@
   "type": "module",
   "scripts": {
     "start": "cross-env NODE_ENV=production dotenv -e .env node src/index.js",
-    "dev":   "cross-env NODE_ENV=development dotenv -e .env nodemon src/index.js",
+    "dev": "cross-env NODE_ENV=development dotenv -e .env nodemon src/index.js",
     "build": "echo \"No build step required\""
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
