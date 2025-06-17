@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papelera Apack - Inicio de Sesion (Admin)</title>
+    <link rel="canonical" href="https://papelera-apack.onrender.com/">
+    <!-- FontAwesome local -->
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
+    <!-- Swiffy Slider local -->
+    <link rel="stylesheet" href="/assets/swiffy/swiffy-slider.min.css">
+    <script src="/assets/swiffy/swiffy-slider.min.js" defer></script>
+    
+    <link rel="stylesheet" href="/inicio/Style.css">
+    
+    <link rel="icon" type="image/jpeg" href="/Imagen/Logo_Apack.jpg">
+  </head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <div class="sidehead">
+            <div class="Logo">
+                <img src="/Imagen/Logo_Apack.jpg" alt="Logo" class="Logoinicial">
+                <div class="acciones">
+                    <button onclick="window.location.href='/Usuarios/index.html'" class="btn">Vista de Productos Usuarios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="login-wrapper">
+  <div class="login-form">
+    <h1>Iniciar sesión</h1>
+    <div id="loginError" style="display: none;"></div>
+    <form method="post" id="loginForm">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" name="password" placeholder="********" required>
+
+      <button type="submit" class="btn-login">Ingresar</button>
+    </form>
+  </div>
+</div>
+
+<script src="/inicio/script.js" defer></script>
+</body>
+</html>
