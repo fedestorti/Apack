@@ -50,13 +50,7 @@ app.use(express.static(publicDir));
 // ------------ Health check ------------ //
 app.get('/api/ping', (_req, res) => res.json({ status: 'ok' }));
 
-// ------------ Catch-all para SPA ------------ //
-const extensionesEstaticas = ['.css', '.js', '.jpg', '.jpeg', '.png', '.webp', '.svg', '.ico', '.woff2', '.ttf'];
-app.use((req, res, next) => {
-  const ext = path.extname(req.path);
-  if (extensionesEstaticas.includes(ext)) return next();
-  res.sendFile(path.join(publicDir, 'Usuarios', 'index.html'));
-});
+
 
 // ------------ Iniciar servidor ------------ //
 app.listen(PORT, () => {
