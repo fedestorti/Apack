@@ -58,20 +58,6 @@ app.use((req, res, next) => {
   res.sendFile(path.join(publicDir, 'Usuarios', 'index.html'));
 });
 
-if (process.env.EJECUTAR_SETUP === 'true') {
-  import('./crearTablas.js')
-    .then(() => {
-      console.log('✅ Tablas creadas correctamente');
-      return import('./insertarUsuario.js');
-    })
-    .then(() => {
-      console.log('✅ Usuario inicial insertado');
-    })
-    .catch(err => {
-      console.error('❌ Error durante el setup inicial:', err);
-    });
-}
-
 // ------------ Iniciar servidor ------------ //
 app.listen(PORT, () => {
   console.log(`✅ API escuchando en http://localhost:${PORT}`);
