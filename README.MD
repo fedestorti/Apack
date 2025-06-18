@@ -36,8 +36,7 @@ Apack/
 ├── public/                    # HTML, imágenes y frontend estático
 │   ├── RegistroNuevoProductos/
 │   ├── Usuarios/              # Galería pública
-│   ├── ModificarProductos/    # Galería de admin
-│   └── Ayuda/
+│   └── ModificarProductos/    # Galería de admin
 ├── src/
 │   ├── routes/                # Rutas Express
 │   │   ├── auth.routes.js
@@ -45,8 +44,6 @@ Apack/
 │   │   └── imagenes.routes.js
 │   ├── controllers/           # Lógica de las rutas
 │   ├── middlewares/           # JWT + Multer
-│   └── config/                # Configuraciones externas
-├── imagenesProductos/         # Carpeta protegida para imágenes
 └── README.md
 ```
 
