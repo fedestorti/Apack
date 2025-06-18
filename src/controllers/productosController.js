@@ -78,79 +78,56 @@ export const actualizarProducto = async (req, res) => {
     const { codigo } = req.params;
     const { nombre_producto, precio } = req.body;
 
+    // 1) Obtener datos previos
     const prev = await pool.query(
-      'SELECT * FROM productos WHERE LOWER(TRIM(codigo_producto)) = LOWER($1)',
+      'SELECT imagen, public_id FROM productos WHERE LOWER(TRIM(codigo_producto)) = LOWER($1)',
       [codigo.trim()]
     );
-
     if (!prev.rowCount) {
       return res.status(404).json({ message: 'Producto no encontrado' });
     }
+    const existente  = prev.rows[0];
+    let   newImage   = existente.imagen;
+    let   newPubId   = existente.public_id;
 
-    const existente = prev.rows[0];
-
-    const newName  = nombre_producto?.trim() ?? existente.nombre_producto;
-    const newPrice = precio ?? existente.precio;
-    let   newImage = existente.imagen;
-    let   newPublicId = existente.public_id;
-
+    // 2) Si llegó archivo nuevo, borramos el viejo y recogemos el nuevo
     if (req.file) {
-
-    // 🔒 Validaciones de tipo y tamaño
-      if (!req.file.mimetype.startsWith('image/')) {
-        return res.status(400).json({ message: 'Solo se permiten archivos de imagen' });
-      }
-    
-      if (req.file.size > 2 * 1024 * 1024) {
-        return res.status(400).json({ message: 'La imagen excede el tamaño máximo de 2MB' });
-      }
-
-    // 🧹 Borrar imagen anterior de Cloudinary si existe
+      // 2.a) Borrar anterior si existía
       if (existente.public_id) {
         try {
           await cloudinary.uploader.destroy(existente.public_id);
-        } catch (e) {
-          console.warn('⚠️ No se pudo borrar la imagen anterior en Cloudinary:', e.message);
+        } catch (err) {
+          console.warn('⚠️ No se pudo borrar img previa:', err.message);
         }
       }
-
-    // 🆕 Subir nueva imagen
-      const b64 = Buffer.from(req.file.buffer).toString('base64');
-      const dataURI = `data:${req.file.mimetype};base64,${b64}`;
-      const uploadResult = await cloudinary.uploader.upload(dataURI);
-
-      newImage = uploadResult.secure_url;
-      newPublicId = uploadResult.public_id;
+      // 2.b) Multer-Cloudinary ya subió la nueva:
+      newImage = req.file.path;       // secure_url
+      newPubId = req.file.filename;   // public_id
     }
 
-    // Construcción dinámica del SET
+    // 3) Construir dinamicamente el SET de SQL
     const setClauses = [];
-    const vals = [];
-    let idx = 1;
+    const values     = [];
+    let   idx        = 1;
 
     if (nombre_producto != null) {
       setClauses.push(`nombre_producto = $${idx}`);
-      vals.push(newName);
+      values.push(nombre_producto.trim());
       idx++;
     }
-
     if (precio != null) {
       setClauses.push(`precio = $${idx}`);
-      vals.push(newPrice);
+      values.push(precio);
       idx++;
     }
-
     if (req.file) {
-      setClauses.push(`imagen = $${idx}`);
-      vals.push(newImage);
-      idx++;
-
-      setClauses.push(`public_id = $${idx}`);
-      vals.push(newPublicId);
-      idx++;
+      setClauses.push(`imagen = $${idx}`, `public_id = $${idx + 1}`);
+      values.push(newImage, newPubId);
+      idx += 2;
     }
 
-    vals.push(codigo.trim());
+    // El WHERE
+    values.push(codigo.trim());
     const sql = `
       UPDATE productos
          SET ${setClauses.join(', ')}
@@ -158,13 +135,13 @@ export const actualizarProducto = async (req, res) => {
        RETURNING *;
     `;
 
-    const { rows } = await pool.query(sql, vals);
-
+    // 4) Ejecutar y devolver
+    const { rows } = await pool.query(sql, values);
     res.json({ message: 'Producto actualizado', producto: rows[0] });
 
   } catch (err) {
     console.error('Error al actualizar:', err);
-    res.status(500).json({ message: 'Error al actualizar producto' });
+    res.status(500).json({ message: 'Error al actualizar producto', detail: err.message });
   }
 };
 
