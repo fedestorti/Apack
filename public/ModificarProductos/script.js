@@ -100,15 +100,32 @@ window.prepararEdicion = codigo => {
 
 btnConfirmar.onclick = async e => {
   e.preventDefault();
-  // … tu preparación de formData…
+  if (!codigoActual) {
+    alert('Código faltante.');
+    return;
+  }
+
+  // 1) Construye la URL dinámica según el entorno
+  const API_BASE = location.origin; // en local: http://localhost:4000, en Render: https://apack.onrender.com
+  const url = `${API_BASE}/api/productos/${codigoActual.trim().toLowerCase()}`;
+
+  // 2) Prepara el FormData
+  const formData = new FormData();
+  formData.append('nombre_producto', editNombre.value.trim());
+  formData.append('precio', editPrecio.value.trim());
+  if (inputImagen.files[0]) {
+    formData.append('imagen', inputImagen.files[0]);
+  }
+
   try {
     const res = await fetch(url, {
       method: 'PUT',
       headers: { Authorization: `Bearer ${token}` },
       body: formData
     });
+
     if (!res.ok) {
-      // parsea JSON de error
+      // parsea JSON de error si viene
       let errMsg = `HTTP ${res.status}`;
       try {
         const errBody = await res.json();
@@ -116,11 +133,17 @@ btnConfirmar.onclick = async e => {
       } catch {}
       throw new Error(errMsg);
     }
+
     const updated = await res.json();
     alert('Producto actualizado con éxito.');
-    // … rest of success flow …
+    cerrarModal();
+    productos = productos.map(p =>
+      p.codigo_producto === updated.codigo_producto ? updated : p
+    );
+    renderGaleria();
+
   } catch (err) {
-    console.error('Error inesperado al actualizar:', err.message);
+    console.error('Error inesperado al actualizar:', err);
     alert('Error al actualizar: ' + err.message);
   }
 };
