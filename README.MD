@@ -1,4 +1,4 @@
 # Venta de productos Papelera
 
 ALTER TABLE productos
-  ALTER COLUMN imagen TYPE TEXT;
+ADD COLUMN public_id TEXT;
