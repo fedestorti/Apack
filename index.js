@@ -42,35 +42,17 @@ app.use('/auth', authRoutes);
 app.use('/api/productos', productosRoutes);
 app.use('/api/imagenes', imagenesRoutes);
 
-// ------------ Archivos estáticos ------------ //
+// ------------ Servir carpeta public completa ------------ //
 const publicDir = path.join(__dirname, 'public');
 app.use(express.static(publicDir));
-
-// Directorio de tu SPA (donde está index.html dentro de public/Usuarios)
-const spaDir = path.join(publicDir, 'Usuarios');
-app.use(express.static(spaDir));
 
 // ------------ Health check ------------ //
 app.get('/api/ping', (_req, res) => res.json({ status: 'ok' }));
 
-// ------------ Catch-all para SPA ------------ //
-// Para cualquier GET que no sea API ni auth, sirve tu index.html
-// ------------ Archivos estáticos ------------ //
-const publicDir = path.join(__dirname, 'public');
-app.use(express.static(publicDir));
-const spaDir = path.join(publicDir, 'Usuarios');
-app.use(express.static(spaDir));
-
-// ------------ Health check ------------ //
-app.get('/api/ping', (_req, res) => res.json({ status: 'ok' }));
-
-// ------------ Fallback SPA ------------ //
-// Este middleware se ejecuta solo si ninguna ruta previa encajó.
-// No usa path-to-regexp, así que no habrá más errores de parámetros.
+// ------------ Fallback SPA (public/Usuarios/index.html) ------------ //
 app.use((req, res) => {
-  res.sendFile(path.join(spaDir, 'index.html'));
+  res.sendFile(path.join(publicDir, 'Usuarios', 'index.html'));
 });
-
 
 // ------------ Iniciar servidor ------------ //
 app.listen(PORT, () => {
