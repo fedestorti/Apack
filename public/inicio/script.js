@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      console.log("🔐 ENVIANDO:", { email, password });
       const res = await fetch(`${location.origin}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
