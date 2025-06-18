@@ -53,7 +53,6 @@ Apack/
 
 - **Node.js + Express** – backend
 - **PostgreSQL** – base de datos
-- **Multer** – subida de imágenes
 - **Cloudinary** – hosting de imágenes
 - **JWT** – autenticación segura
 - **HTML/CSS/JS** – frontend sin frameworks
@@ -103,7 +102,6 @@ node index.js
 
 ## 🔒 Seguridad
 
-- La carpeta `/imagenesProductos` solo es accesible mediante rutas autenticadas.
 - Solo usuarios con JWT pueden acceder a las rutas de edición.
 - Las claves y datos sensibles están protegidos mediante `.env` (excluido por `.gitignore`).
 
@@ -120,7 +118,7 @@ node index.js
 ## 📬 Contacto
 
 Hecho por **Fede** – Técnico en programación  
-📧 Email: fedestorti@example.com  
-📱 WhatsApp: [Contactar](https://wa.me/5491125880227)
+📧 Email: Federiconicolasstorti@gmial.com
+📱 WhatsApp: [Contactar](https://wa.me/5491155885808)
 
 ---
