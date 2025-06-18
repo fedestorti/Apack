@@ -90,7 +90,7 @@ window.prepararEdicion = codigo => {
   const prod = productos.find(p => p.codigo_producto === codigo);
   if (!prod) return;
 
-  codigoActual = codigo;
+  codigoActual = prod.codigo_producto;
   editNombre.value    = prod.nombre_producto;
   editPrecio.value    = prod.precio;
   previewEditar.innerHTML = `<img src="${location.origin}${prod.imagen}" />`;
