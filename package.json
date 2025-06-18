@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "dotenv -e .env node src/index.js",
+    "start": "dotenv -e .env node index.js",
     "dev": "cross-env NODE_ENV=development dotenv -e .env nodemon src/index.js",
     "build": "echo \"No build step required\""
   },
