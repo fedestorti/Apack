@@ -100,35 +100,27 @@ window.prepararEdicion = codigo => {
 
 btnConfirmar.onclick = async e => {
   e.preventDefault();
-  if (!codigoActual) {
-    alert('Código faltante.');
-    return;
-  }
-  const formData = new FormData();
-  formData.append('nombre_producto', editNombre.value.trim());
-  formData.append('precio', editPrecio.value.trim());
-  if (inputImagen.files[0]) formData.append('imagen', inputImagen.files[0]);
-
+  // … tu preparación de formData…
   try {
-    const res = await fetch(`${API}/productos/${codigoActual.trim().toLowerCase()}`, {
+    const res = await fetch(url, {
       method: 'PUT',
       headers: { Authorization: `Bearer ${token}` },
       body: formData
     });
     if (!res.ok) {
-      const err = await res.text();
-      throw new Error(err);
+      // parsea JSON de error
+      let errMsg = `HTTP ${res.status}`;
+      try {
+        const errBody = await res.json();
+        errMsg = errBody.message || errMsg;
+      } catch {}
+      throw new Error(errMsg);
     }
     const updated = await res.json();
-    alert('Producto actualizado.');
-    cerrarModal();
-
-    productos = productos.map(p =>
-      p.codigo_producto === updated.codigo_producto ? updated : p
-    );
-    renderGaleria(); // ya actualiza la imagen también sin recargar
+    alert('Producto actualizado con éxito.');
+    // … rest of success flow …
   } catch (err) {
-    console.error(err);
+    console.error('Error inesperado al actualizar:', err.message);
     alert('Error al actualizar: ' + err.message);
   }
 };
