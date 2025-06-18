@@ -43,18 +43,20 @@ app.use('/api/productos', productosRoutes);
 app.use('/api/imagenes', imagenesRoutes);
 
 // ------------ Archivos estáticos ------------ //
-const publicDir = path.join(__dirname, '../public');
+const publicDir = path.join(__dirname, 'public');
 app.use(express.static(publicDir));
+
+// Directorio de tu SPA (donde está index.html dentro de public/Usuarios)
+const spaDir = path.join(publicDir, 'Usuarios');
+app.use(express.static(spaDir));
 
 // ------------ Health check ------------ //
 app.get('/api/ping', (_req, res) => res.json({ status: 'ok' }));
 
 // ------------ Catch-all para SPA ------------ //
-const extensionesEstaticas = ['.css', '.js', '.jpg', '.jpeg', '.png', '.webp', '.svg', '.ico', '.woff2', '.ttf'];
-app.use((req, res, next) => {
-  const ext = path.extname(req.path);
-  if (extensionesEstaticas.includes(ext)) return next();
-  res.sendFile(path.join(publicDir, 'Usuarios', 'index.html'));
+// Para cualquier GET que no sea API ni auth, sirve tu index.html
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(spaDir, 'index.html'));
 });
 
 // ------------ Iniciar servidor ------------ //
