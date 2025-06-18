@@ -2,6 +2,10 @@
 
 Plataforma web para gestión y visualización de productos de una papelera. Incluye galería pública, sistema de autenticación con JWT, panel de administración, subida de imágenes a Cloudinary y carrito de compras con envío por WhatsApp.
 
+ALTER TABLE productos
+  ALTER COLUMN precio TYPE numeric
+    USING precio::numeric;
+
 ---
 
 ## 🚀 Funcionalidades principales
