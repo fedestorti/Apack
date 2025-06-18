@@ -55,7 +55,7 @@ app.get('/api/ping', (_req, res) => res.json({ status: 'ok' }));
 
 // ------------ Catch-all para SPA ------------ //
 // Para cualquier GET que no sea API ni auth, sirve tu index.html
-app.get('/*', (req, res) => {
+app.get('/:path(.*)', (req, res) => {
   res.sendFile(path.join(spaDir, 'index.html'));
 });
 
