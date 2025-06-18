@@ -91,6 +91,7 @@ window.prepararEdicion = codigo => {
   const prod = productos.find(p => p.codigo_producto === codigo);
   if (!prod) return;
 
+  codigoActual = codigo;
   editCodigo.value = codigo;
   editNombre.value = prod.nombre_producto;
   editPrecio.value = prod.precio;
