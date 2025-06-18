@@ -16,8 +16,8 @@
 const LS_KEY = 'miCarrito';
 const PHONE  = '5491125880227';   // ← cambia a tu número sin el “+”
 
-const loadFromLS = () => JSON.parse(localStorage.getItem(LS_KEY)) || [];
-const saveToLS   = data => localStorage.setItem(LS_KEY, JSON.stringify(data));
+const loadFromLS = () => JSON.parse(sessionStorage.getItem(LS_KEY)) || [];
+const saveToLS   = data => sessionStorage.setItem(LS_KEY, JSON.stringify(data));
 
 /******************************************
  * 2. Estado global
