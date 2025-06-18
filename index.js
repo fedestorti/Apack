@@ -55,9 +55,22 @@ app.get('/api/ping', (_req, res) => res.json({ status: 'ok' }));
 
 // ------------ Catch-all para SPA ------------ //
 // Para cualquier GET que no sea API ni auth, sirve tu index.html
-app.get('/:path(.*)', (req, res) => {
+// ------------ Archivos estáticos ------------ //
+const publicDir = path.join(__dirname, 'public');
+app.use(express.static(publicDir));
+const spaDir = path.join(publicDir, 'Usuarios');
+app.use(express.static(spaDir));
+
+// ------------ Health check ------------ //
+app.get('/api/ping', (_req, res) => res.json({ status: 'ok' }));
+
+// ------------ Fallback SPA ------------ //
+// Este middleware se ejecuta solo si ninguna ruta previa encajó.
+// No usa path-to-regexp, así que no habrá más errores de parámetros.
+app.use((req, res) => {
   res.sendFile(path.join(spaDir, 'index.html'));
 });
+
 
 // ------------ Iniciar servidor ------------ //
 app.listen(PORT, () => {
