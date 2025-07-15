@@ -1,0 +1,43 @@
+CREATE TABLE public.cliente (
+    id_cliente integer NOT NULL,
+    dato_cliente character varying(150) NOT NULL,
+    dni_cuit character varying(20) NOT NULL,
+    email character varying(100) UNIQUE,
+    telefono character varying(20),
+    direccion character varying(150),
+    fecha_registro timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    rol character varying(50) DEFAULT 'usuario' NOT NULL,
+    CONSTRAINT cliente_pkey PRIMARY KEY (id_cliente)
+);
+
+CREATE TABLE public.productos (
+    id integer NOT NULL,
+    codigo_producto text UNIQUE,
+    nombre_producto text NOT NULL,
+    precio_min numeric(10,2) NOT NULL,
+    imagen bytea DEFAULT '\x'::bytea,
+    fecha_registro timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    cantidad_prod integer DEFAULT 0,
+    precio_may numeric(10,2) DEFAULT 0,
+    cantidad_may integer DEFAULT 0 NOT NULL,
+    CONSTRAINT productos_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE public.transacciones (
+    id_transaccion integer NOT NULL,
+    id_producto integer NOT NULL,
+    cantidad integer NOT NULL CHECK (cantidad > 0),
+    precio_unitario numeric(12,2) NOT NULL,
+    fecha timestamp without time zone DEFAULT now() NOT NULL,
+    CONSTRAINT transacciones_pkey PRIMARY KEY (id_transaccion),
+    CONSTRAINT transacciones_id_producto_fkey FOREIGN KEY (id_producto) REFERENCES public.productos(id)
+);
+
+CREATE TABLE public.usuarios (
+    id integer NOT NULL,
+    nombre text NOT NULL,
+    apellido text NOT NULL,
+    email text NOT NULL UNIQUE,
+    "contraseña" text NOT NULL,
+    CONSTRAINT usuarios_pkey PRIMARY KEY (id)
+);
