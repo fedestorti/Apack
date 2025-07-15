@@ -41,3 +41,29 @@ CREATE TABLE public.usuarios (
     rol character varying(50) DEFAULT 'usuario' NOT NULL,
     CONSTRAINT usuarios_pkey PRIMARY KEY (id)
 );
+
+
+
+// Prueba
+INSERT INTO public.productos (id, codigo_producto, nombre_producto, precio_min, imagen, fecha_registro, cantidad_prod, precio_may, cantidad_may)
+VALUES
+(1, 'P001', 'Resma A4 500 hojas', 2500.00, NULL, CURRENT_TIMESTAMP, 100, 2200.00, 50),
+(2, 'P002', 'Bolígrafo azul', 150.00, NULL, CURRENT_TIMESTAMP, 500, 120.00, 200),
+(3, 'P003', 'Carpeta cartón oficio', 800.00, NULL, CURRENT_TIMESTAMP, 80, 700.00, 30),
+(4, 'P004', 'Cuaderno tapa dura 100 hojas', 1200.00, NULL, CURRENT_TIMESTAMP, 150, 1000.00, 50),
+(5, 'P005', 'Lapicera gel negra', 200.00, NULL, CURRENT_TIMESTAMP, 300, 180.00, 100),
+(6, 'P006', 'Marcador fluorescente amarillo', 300.00, NULL, CURRENT_TIMESTAMP, 200, 250.00, 80),
+(7, 'P007', 'Goma de borrar grande', 100.00, NULL, CURRENT_TIMESTAMP, 400, 90.00, 150),
+(8, 'P008', 'Pegamento en barra 21g', 400.00, NULL, CURRENT_TIMESTAMP, 180, 350.00, 60),
+(9, 'P009', 'Caja de clips 100 unidades', 250.00, NULL, CURRENT_TIMESTAMP, 250, 200.00, 100),
+(10, 'P010', 'Tijera escolar 13cm', 600.00, NULL, CURRENT_TIMESTAMP, 90, 550.00, 40),
+(11, 'P011', 'Resaltador verde', 280.00, NULL, CURRENT_TIMESTAMP, 220, 240.00, 90),
+(12, 'P012', 'Compás metálico', 1500.00, NULL, CURRENT_TIMESTAMP, 70, 1300.00, 30),
+(13, 'P013', 'Set de reglas 30cm', 850.00, NULL, CURRENT_TIMESTAMP, 120, 750.00, 50),
+(14, 'P014', 'Carpeta plástica A4', 500.00, NULL, CURRENT_TIMESTAMP, 130, 450.00, 60),
+(15, 'P015', 'Lapicera roja', 180.00, NULL, CURRENT_TIMESTAMP, 350, 160.00, 120),
+(16, 'P016', 'Marcador permanente negro', 400.00, NULL, CURRENT_TIMESTAMP, 160, 350.00, 70),
+(17, 'P017', 'Hoja milimetrada paquete 100', 950.00, NULL, CURRENT_TIMESTAMP, 50, 850.00, 20),
+(18, 'P018', 'Perforadora metálica 2 agujeros', 2200.00, NULL, CURRENT_TIMESTAMP, 40, 2000.00, 15),
+(19, 'P019', 'Archivador A-Z', 1800.00, NULL, CURRENT_TIMESTAMP, 60, 1600.00, 25),
+(20, 'P020', 'Block de notas adhesivas', 350.00, NULL, CURRENT_TIMESTAMP, 210, 300.00, 90);
