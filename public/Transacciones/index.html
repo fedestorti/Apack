@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Papelera Apack - Transacciones (Admin) </title>
+    <!-- FontAwesome local -->
+    <link rel="stylesheet" href="/public/assets/fontawesome/css/all.min.css">
+    <!-- Swiffy Slider local -->
+    <link rel="stylesheet" href="/public/assets/swiffy/swiffy-slider.min.css">
+    <script src="/public/assets/swiffy/swiffy-slider.min.js" defer></script>
+    <link rel="stylesheet" href="/public/Transacciones/Style.css" />
+    <link rel="icon" type="image/jpeg" href="/public/Imagen/Logo_Apack.jpg">  
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="sidehead">
+        <div class="Logo">
+            <img src="/public/Imagen/Logo_Apack.jpg" alt="Logo" class="Logoinicial" />
+            <input type="text" id="searchInput" class="search-input-header" placeholder="🔍   Buscar por código o nombre…"/>
+
+          <div class="acciones">
+            
+            <div class="carrito-icono" onclick="mostrarModalCarrito()">
+              <i class="fas fa-shopping-cart"></i>
+              <span id="contadorCarrito" class="contador-carrito">0</span>
+            </div>
+            <button onclick="window.location.href='/public/MenuPrincipal/index.html'" class="btn">Menu Principal</button>
+            <button onclick="window.location.href='/public/RegistroNuevoProductos/index.html'" class="btn">Agregar Productos</button>
+            <button id="btnCerrarSesion" class="btn logout">Cerrar sesión</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  
+<div class="galeria" id="galeria"></div>
+
+
+<!-- Modal de productos -->
+<div id="modalCarrito" class="modal">
+  <div class="modal-contenido">
+    <span id="cerrarModalCarrito" class="cerrar">&times;</span>
+
+    <div class="modal-body">
+      <!-- 📝 Lado izquierdo: cliente -->
+      <div class="modal-cliente">
+        <!-- Buscador -->
+        <div class="buscador-cliente">
+          <h4>📋 Datos del cliente</h4>
+          <input type="text" id="busquedaCliente" placeholder="Buscar Cliente">
+        </div>
+        <button id="btnBuscarCliente">Buscar Cliente</button>
+        <!-- Resultados cliente -->
+        <div id="resultadoCliente" class="cliente-ficha">
+          <p>🔍 Busca un cliente para mostrar sus datos aquí.</p>
+        </div>
+      
+        <div class="contenedor">
+          <div class="desplegable">
+            <h4 id="seleccionPago">💳 Forma de Pago: <em>ninguna</em></h4>
+            <div class="titulo" onclick="toggleLista('pagos')">
+              💳 Formas de Pago ⬇️
+            </div>
+            <ul id="pagos" class="lista">
+              <li onclick="seleccionar(this, 'pagos', 'seleccionPago', '💳 Forma de Pago: ')">Efectivo</li>
+              <li onclick="seleccionar(this, 'pagos', 'seleccionPago', '💳 Forma de Pago: ')">Tarjeta de Débito</li>
+              <li onclick="seleccionar(this, 'pagos', 'seleccionPago', '💳 Forma de Pago: ')">Tarjeta de Crédito</li>
+              <li onclick="seleccionar(this, 'pagos', 'seleccionPago', '💳 Forma de Pago: ')">Transferencia Bancaria</li>
+              <li onclick="seleccionar(this, 'pagos', 'seleccionPago', '💳 Forma de Pago: ')">Mercado Pago</li>
+            </ul>
+          </div>
+        
+          <div class="desplegable">
+            <h4 id="seleccionFactura">🧾 Tipo de Factura: <em>ninguna</em></h4>
+            <strong><div class="titulo" onclick="toggleLista('facturas')"></strong>
+              🧾 Tipos de Factura ⬇️
+            </div>
+            <ul id="facturas" class="lista">
+              <li onclick="seleccionar(this, 'facturas', 'seleccionFactura', '🧾 Tipo de Factura: ')">Factura A</li>
+              <li onclick="seleccionar(this, 'facturas', 'seleccionFactura', '🧾 Tipo de Factura: ')">Factura B</li>
+              <li onclick="seleccionar(this, 'facturas', 'seleccionFactura', '🧾 Tipo de Factura: ')">Factura C</li>
+            </ul>
+          </div>
+        </div>
+        <button class="Impresion_Fac" onclick="generarFacturaPDF()">🖨️ Imprimir Factura</button>
+        <button class="Impresion_Fac" onclick="generarTicketPDF()">🖨️ Imprimir Ticket</button>
+        
+
+    </div>
+      <!-- 🛒 Lado derecho: productos -->
+      <div class="modal-productos">
+        <input type="text" id="filtroProducto" placeholder="🔍 Buscar producto por código o nombre" />
+        <!-- 🔥 Botón para vaciar carrito -->
+        <button id="vaciarCarrito" class="btn-vaciar">
+          🗑 Vaciar Carrito
+          </button>
+        <h3>🛒 Productos seleccionados</h3>
+      <!-- 🔥 Encabezado fijo -->
+      <div class="carrito-header">
+        <span class="codigo">Código</span>
+        <span class="nombre">Nombre</span>
+        <span class="precio">Precio</span>
+        <span class="cantidad">Cantidad</span>
+      </div>
+        <ul id="listaCarrito">
+          <!-- Los productos seleccionados se listarán aquí -->
+        </ul>
+        <div class="carrito-total">
+          <span><strong>Total Cantidad:</strong> 0</span>
+          <span><strong>Total Precio:</strong> $0.00</span>
+        </div>
+        <!-- Botón finalizar transacción -->
+        <button id="finalizarTransaccion" class="btn-finalizar">
+          Finalizar Transacción
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Modal para ampliar imagen -->
+<div id="visorImagen" class="modal-imagen">
+  <span class="cerrar">&times;</span>
+    <img class="imagen-ampliada" id="imagenAmpliada" />
+</div>
+
+<!-- Funciones Modificar/Eliminar -->
+<script src="/public/Transacciones/script.js" defer></script>
+<!-- Cierre de Session -->
+<script src="/public/Seguridad/sesion.js"></script>
+<!-- Seguridad de pagina -->
+<script type="module" src="/public/Seguridad/authProteccion.js"></script>
+
+</body>
+</html>
